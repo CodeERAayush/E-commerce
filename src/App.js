@@ -5,6 +5,7 @@ import { LoginPage } from './pages/LoginPage';
 import {BrowserRouter as Router,Link,Route,Routes} from 'react-router-dom';
 import { SignupPage } from './pages/SignupPage';
 import NavBar from './components/NavBar';
+import { AfterLog } from './pages/AfterLog';
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
       <Router>
         <NavBar/>
 <Routes>
-  <Route path='/' element={<HomePage/>}/>
+  <Route path='/' element={localStorage.getItem('name')===null?<HomePage/>:<AfterLog/>}/>
   <Route path='/Login' element={<LoginPage/>}/>
   <Route path='/Signup' element={<SignupPage/>}/>
 </Routes>
      </Router>
+     
     </div>
   );
 }

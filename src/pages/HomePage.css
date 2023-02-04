@@ -50,3 +50,8 @@
     box-shadow: 0 0 8px white;
     color: white;
 }
+.items-in-row{
+    flex-direction: row;
+    display: flex;
+    overflow-y: auto;
+}

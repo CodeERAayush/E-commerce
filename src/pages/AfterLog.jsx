@@ -2,13 +2,9 @@ import React,{useState} from "react";
 import { ItemCard } from "../components/itemCard";
 import NavBar from "../components/NavBar";
 import './HomePage.css'
-import { LoginPage } from "./LoginPage";
-import { SignupPage } from "./SignupPage";
-
-export const HomePage=()=>{
-      
-        return (
-                <>
+export const AfterLog=()=>{
+    return(
+        <>
         <div className="screenHome">
         {/* <NavBar/> */}
         <div className="left-section">
@@ -30,5 +26,5 @@ export const HomePage=()=>{
         <ItemCard/>
         </div>
         </>
-        );
+    )
 }

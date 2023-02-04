@@ -1,8 +1,10 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Form from '../components/form';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from '../firebase_config';
 export const LoginPage=()=>{
+    const navigate=useNavigate();
     const signup=false;
     return(
         <div className='login-screen'>

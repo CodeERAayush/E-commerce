@@ -1,9 +1,16 @@
 import React ,{useState}from "react";
 import './form.css'
-import { loginAccount, signInWithGoogle } from "../firebase_config";
+import { signInWithGoogle } from "../firebase_config";
+import {getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,createUserWithEmailAndPassword,signInWithEmailAndPassword}from "firebase/auth";
+import { auth ,db} from "../firebase_config";
 
+import { collection, getDoc, addDoc, updateDoc, doc, deleteDoc,setDoc } from 'firebase/firestore'
 import { createAccount } from "../firebase_config";
+import { useNavigate } from "react-router-dom";
 function Form(props) {
+
+const Navigate=useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -15,7 +22,7 @@ function Form(props) {
         e.preventDefault();
         console.log('called Signup Function!')
         if(formData.confirmPassword===formData.password&&formData.name!=="")
-        createAccount(formData.email,formData.password);
+        createAccount(formData.email,formData.password,formData.name);
         else{
           alert('Please Enter Correct Values!')
         }
@@ -25,6 +32,53 @@ const onLogin=(e)=>{
   console.log('called Login Function!')
   loginAccount(formData.email,formData.password);
 }
+
+
+
+
+const loginAccount=(email,password)=>{
+  signInWithEmailAndPassword(auth,email,password)
+  .then(async(userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+const docSnap = await getDoc(doc(db, "users", user.uid));
+if (docSnap.exists()) {
+  const {email,name,profile}=docSnap.data();
+  console.log("Document data:", name);
+
+
+
+  //save data to local storage!
+  
+  localStorage.setItem("name",name);
+  localStorage.setItem("email",email);
+  localStorage.setItem("profile",profile);
+  Navigate('/')
+  window.location.reload();
+} else {
+  // doc.data() will be undefined in this case
+  console.log("No such document!");
+}
+    console.log(user.uid);
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
   const handleChange = event => {
     setFormData({
       ...formData,
