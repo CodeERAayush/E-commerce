@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+.screenHome{
+    background-color: aliceblue;
+     background-image: url("../../public/images/hero_img.jpg");
+     background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.banner_fadeBottom{
+    height: 120px;
+    background:linear-gradient(180deg,
+        transparent,
+        rgba(224, 207, 131, 0.354),
+        #d0966c76
+    ); 
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width: 100%;
+}
+.left-section{
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    padding-left: 50px;
+    flex-direction: column;
+}
+.hero-title{
+    font-family: 'Lobster', cursive;
+    color: white;
+    margin: 10px;
+}
+.hero-button{
+    background-color: rgba(250, 235, 215, 0.379);
+    backdrop-filter: blur(2em);
+    box-shadow: inset 0 -16px 2px rgba(255, 255, 255, 0.701);
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.hero-button:hover{
+    box-shadow: 0 0 8px white;
+    color: white;
+}
