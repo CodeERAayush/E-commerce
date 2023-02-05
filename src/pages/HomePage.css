@@ -55,3 +55,28 @@
     display: flex;
     overflow-y: auto;
 }
+.items-in-row::-webkit-scrollbar{
+    display: none;
+}
+.category-heading-holder{
+display: flex;
+margin-left: 14px;
+align-items: flex-end;
+}
+.category-heading{
+font-weight: 600;
+margin-bottom: 0px;
+cursor: pointer;
+}
+.category-subhead{
+font-size: 10px;
+margin-bottom: 2px;
+margin-left: 4px;
+color: blue;
+font-weight: 500;
+cursor: pointer;
+}
+.show-products{
+    display: flex;
+    flex-direction: column;
+}

@@ -6,7 +6,15 @@ import { LoginPage } from "./LoginPage";
 import { SignupPage } from "./SignupPage";
 
 export const HomePage=()=>{
+        const [isHovering, setIsHovering] = useState(false);
+
+        const handleMouseOver = () => {
+          setIsHovering(true);
+        };
       
+        const handleMouseOut = () => {
+          setIsHovering(false);
+        };
         return (
                 <>
         <div className="screenHome">
@@ -18,17 +26,25 @@ export const HomePage=()=>{
         </div>
         </div>
         <div className="banner_fadeBottom"></div>
-        <div className="items-in-row">
-                <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        <ItemCard/>
-        </div>
+        <div className="show-products">
+                <div className="category-heading-holder">
+                    <p className="category-heading"
+                    onMouseOver={handleMouseOver}
+                    onMouseOut={handleMouseOut}>Category Name</p>
+                    {isHovering&&<p className="category-subhead">Explore More</p>}
+                </div>
+                <div className="items-in-row">
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                    <ItemCard />
+                </div>
+            </div>
         </>
         );
 }

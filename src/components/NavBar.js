@@ -1,11 +1,13 @@
 import React from "react";
 import Dropdown from "./DropDown";
 import { Link } from "react-router-dom";
-import { signInWithGoogle } from "../firebase_config";
+import { auth, signInWithGoogle } from "../firebase_config";
 import './Nav.css'
+import { signOut } from "firebase/auth";
 function NavBar() {
-  const logout=()=>{
+  const logout=async ()=>{
     localStorage.clear()
+    await signOut(auth)
     window.location.reload();
   }
   return (

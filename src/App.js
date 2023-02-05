@@ -6,6 +6,7 @@ import {BrowserRouter as Router,Link,Route,Routes} from 'react-router-dom';
 import { SignupPage } from './pages/SignupPage';
 import NavBar from './components/NavBar';
 import { AfterLog } from './pages/AfterLog';
+import { AddProducts } from './pages/AddProducts';
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
       <Router>
         <NavBar/>
 <Routes>
-  <Route path='/' element={localStorage.getItem('name')===null?<HomePage/>:<AfterLog/>}/>
+  <Route path='/' element={<AfterLog/>}/>
   <Route path='/Login' element={<LoginPage/>}/>
   <Route path='/Signup' element={<SignupPage/>}/>
+  <Route path='/AddProd' element={<AddProducts/>}/>
 </Routes>
      </Router>
      

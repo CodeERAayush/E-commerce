@@ -15,3 +15,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.success-msg{
+  width: 100%;
+  padding: 14px;
+  background-color: #dff0d8;
+  color: #468847;
+}
+
+.error-msg{
+  width: 100%;
+  padding: 14px;
+  background-color: #f0d0d3;
+  color: #df786f;
+}
+
+.link{
+  text-decoration: none;
+}
