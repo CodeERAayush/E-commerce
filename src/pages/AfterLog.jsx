@@ -59,7 +59,6 @@ console.log("User is logged in "+ uid);
     let Product;
     const addToCart = async(product)=>{
         if(uid!==null){
-            // console.log(product);
             Product=product;
             Product['qty']=1;
             Product['TotalProductPrice']=Product.qty*Product.price;
@@ -82,7 +81,7 @@ console.log("User is logged in "+ uid);
     return (
         <>
         <div className="screenHome">
-                <div className="left-section">
+                <div className="left-section-home">
                     <h1 className="hero-title">It's Shopping &nbsp; Time!</h1>
                     <h2 className="hero-title">Let's do some shopping for your loved ones!</h2>
                     <button className="hero-button">Browse New</button>

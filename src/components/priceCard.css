@@ -1,0 +1,35 @@
+.price-card{
+    /* background-color: aqua; */
+    margin: 10px;
+    box-shadow: 0 0 2px rgba(128, 128, 128, 0.667);
+    border-radius: 2px;
+    background-color: white;
+}
+.price-tag{
+    font-weight: 600;
+    font-size: 20px;
+    margin: 5px;
+    color: grey;
+}
+.line{
+    height: 1px;
+    background-color: black;
+    opacity: 0.2;
+    margin: 5px;
+}
+.tag-holder{
+    display: flex;
+    width: 100%;
+    padding-left: 10px;
+}
+.price{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 5px;
+}
+.total-price{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}

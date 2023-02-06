@@ -7,6 +7,7 @@ import { SignupPage } from './pages/SignupPage';
 import NavBar from './components/NavBar';
 import { AfterLog } from './pages/AfterLog';
 import { AddProducts } from './pages/AddProducts';
+import { Cart } from './pages/Cart';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
   <Route path='/Login' element={<LoginPage/>}/>
   <Route path='/Signup' element={<SignupPage/>}/>
   <Route path='/AddProd' element={<AddProducts/>}/>
+  <Route path='/Cart' element={<Cart/>}/>
 </Routes>
      </Router>
      

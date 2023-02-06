@@ -1,14 +1,38 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Dropdown from "./DropDown";
 import { Link } from "react-router-dom";
 import { auth, signInWithGoogle } from "../firebase_config";
+import { useNavigate } from "react-router-dom";
 import './Nav.css'
 import { signOut } from "firebase/auth";
 function NavBar() {
+  const navigate=useNavigate();
   const logout=async ()=>{
     localStorage.clear()
     await signOut(auth)
     window.location.reload();
+  }
+  const [userId, setUid]=useState(null);
+    function GetUserUid(){
+        useEffect(()=>{
+            auth.onAuthStateChanged(user=>{
+                if(user){
+                    setUid(user.uid);
+                }
+            })
+        },[])
+        return userId;
+    }
+
+    const uid = GetUserUid();
+  const openCart=()=>{
+if(uid!=null){
+console.log('cart opened!')
+navigate('/Cart')
+}else{
+alert('please login to your account first!')
+navigate('/Login')
+}
   }
   return (
       <nav className="navbar">
@@ -39,6 +63,18 @@ function NavBar() {
         </ul>
       </div>
       <div className="right-part">
+         <p className="login-custom-btn"
+         style={{marginRight:5}}>
+      <button 
+        onClick={openCart}
+        className="navbar-link">
+              <img
+              src="../images/cart.png"
+              height={20}
+              width={20}
+              />
+            </button>
+        </p>
         <Dropdown/>
         {
           localStorage.getItem('name')===null?
