@@ -8,6 +8,8 @@ import NavBar from './components/NavBar';
 import { AfterLog } from './pages/AfterLog';
 import { AddProducts } from './pages/AddProducts';
 import { Cart } from './pages/Cart';
+import Profile from './pages/Profile';
+import { EditProfile } from './pages/EditProfile';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
   <Route path='/Signup' element={<SignupPage/>}/>
   <Route path='/AddProd' element={<AddProducts/>}/>
   <Route path='/Cart' element={<Cart/>}/>
+  <Route path='/Profile' element={<Profile/>}/>
+  <Route path='/Profile/Edit' element={<EditProfile/>}/>
 </Routes>
      </Router>
      

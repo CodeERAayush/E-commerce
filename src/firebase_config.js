@@ -50,6 +50,7 @@ export const createAccount=(email,password,fullName)=>
       email: email,
       password: password,
       profile:"",
+      address:""
     });
     console.log(user.uid);
     loginAccount(email,password);

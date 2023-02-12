@@ -1,7 +1,11 @@
 import React from "react";
 import './ItemInCart.css'
 export const ItemInCard=({elem,cartProductIncrease,removeItem,cartProductDecrease})=>{
-    // console.log(elem.Product.url)
+    console.log(elem)
+    const [orders,setOrders]=React.useState([]);
+    // React.useEffect(()=>{
+    //     setOrders(...orders,[elem]);
+    // },[elem])
     return(
         <>
         <div className="card">
@@ -17,6 +21,7 @@ className="cart-image"
             <div className="cart-right-section">
                 <p className="cart-product-name">{elem.Product.title}</p>
                 <p className="cart-product-subtitle">{elem.Product.description}</p>
+                <p className="cart-product-price">{elem.Product.price} $</p>
                 <p className="stock-status">In Stock</p>
             </div>
             </div>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './Drop.css'
 function Dropdown() {
   const [isOpen, setOpen] = useState(false);
@@ -8,35 +9,25 @@ function Dropdown() {
   };
 
   return (
-    <div className="dropdown">
-      <button 
-      onClick={toggleDropdown} className="dropdown-button">
+    <div>
+      <button onClick={toggleDropdown} className="drop-custom-btn">
         <img
-        style={{
-            width:25,
-            height:25,
-            marginRight:10
-        }}
-        src={'../images/userprofile.png'}
+        src="./images/userprofile.png"
+        style={{height:24,width:24,marginRight:10}}
         />
-        Dropdown
+       {localStorage.getItem('name')&&localStorage.getItem('name').substring(0,localStorage.getItem('name').indexOf(' '))}
       </button>
       {isOpen && (
-        <ul className="dropdown-content">
-          <li className="dropdown-item">
-            <a href="#" className="dropdown-link">
-              Option 1
-            </a>
+        <ul className="dropdown-menu">
+          <li>
+            <Link to='/Profile'>Profile</Link>
           </li>
-          <li className="dropdown-item">
-            <a href="#" className="dropdown-link">
-              Option 2
-            </a>
+          <li>
+          <Link to='/Cart'>Cart</Link>
           </li>
-          <li className="dropdown-item">
-            <a href="#" className="dropdown-link">
-              Option 3
-            </a>
+          <div className="line"></div>
+          <li>
+            <a href="#logout">Logout &#8677;</a>
           </li>
         </ul>
       )}

@@ -51,14 +51,14 @@ navigate('/Login')
             </Link>
           </li>
           <li className="navbar-item">
-          <Link to='/Login' className="navbar-link">
+          <a target='_blank' href="https://codeeraayush-portfolio.netlify.app" className="navbar-link">
               About
-            </Link>
+            </a>
           </li>
           <li className="navbar-item">
-          <Link to='/Signup' className="navbar-link">
+          <a target='_blank' href="https://codeeraayush-portfolio.netlify.app" className="navbar-link">
               Contact
-            </Link>
+            </a>
           </li>
         </ul>
       </div>

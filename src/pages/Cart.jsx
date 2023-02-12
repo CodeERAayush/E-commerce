@@ -26,6 +26,34 @@ useEffect(()=>{
 },[])
 
 
+
+const [cartProducts, setCartProducts]=useState([]);
+
+    // getting cart products from firestore collection and updating the state
+    useEffect(()=>{
+        auth.onAuthStateChanged(async user=>{
+            if(user){
+                await getDocs(db,'cart ' + user.uid).onSnapshot(snapshot=>{
+                    const newCartProduct = snapshot.docs.map((doc)=>({
+                        ID: doc.id,
+                        ...doc.data(),
+                    }));
+                    setCartProducts(newCartProduct);                    
+                })
+            }
+            else{
+                console.log('user is not signed in to retrieve cart');
+            }
+        })
+    },[])
+
+
+
+
+
+
+
+
 console.log(cartItems)
 
 let Product;
@@ -107,7 +135,9 @@ const cartProductDecrease =(cartProduct)=>{
 </div>
 </div>
 <div className="right-section">
-<PriceCard/>
+<PriceCard
+cartItems={cartItems}
+/>
 <button
 className="order-btn"
 >Order Now</button>
