@@ -78,5 +78,9 @@
     .navbar-menu-icon {
       display: block;
     }
+    .login-custom-btn{
+      display: none;
+    }
+
   }
   

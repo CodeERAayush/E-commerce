@@ -5,6 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from '../firebase_config';
 export const LoginPage=()=>{
     const navigate=useNavigate();
+    let signal=false;
+    const signIn=async()=>{
+
+        await signInWithGoogle()
+        navigate('/')
+    //    setTimeout(()=>{
+
+    //        navigate('/')
+    //    },3000)
+    }
     const signup=false;
     return(
         <div className='login-screen'>
@@ -20,7 +30,7 @@ export const LoginPage=()=>{
        </Link>
        <div>
     <button 
-    onClick={signInWithGoogle}
+    onClick={signIn}
     className='google-auth'>
        <img
        className="google-auth-btn"

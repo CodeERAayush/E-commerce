@@ -81,4 +81,9 @@
   }
   .drop-custom-btn:hover{
     box-shadow: 0 0 8px white;
-  }  
+  } 
+  @media (max-width: 767px) {
+    .drop-custom-btn{
+      margin-right: 80px;
+    }
+  }

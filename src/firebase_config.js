@@ -24,17 +24,32 @@ export const auth=getAuth(app);
 const provider=new GoogleAuthProvider();
 const userCollectionRef = collection(db, "users");
 // const storage=app.storage();
-export const signInWithGoogle = () => {
-  signInWithPopup(auth , provider).then((res) => {
+export const signInWithGoogle = async() => {
+  await signInWithPopup(auth , provider).then(async (res) => {
     console.log(res.user)
     const name=res.user.displayName;
     const email=res.user.email;
     const isVer=res.user.emailVerified;
+    const profile=res.user.photoURL;
+
+
+    const docSnap = await getDoc(doc(db, "users", res.user.uid));
+    if(!docSnap.exists()){
+
+      await setDoc(doc(db,'users',res.user.uid),{
+  
+        name:name,
+        email:email,
+        profile:profile,
+        address:''
+
+      });
+    }
+
 
     localStorage.setItem("name",name);
     localStorage.setItem("email",email);
     localStorage.setItem("isVer",isVer);
-    window.location.reload();
   }).catch((error) => {
     console.log(error.message)
   })

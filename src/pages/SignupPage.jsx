@@ -2,11 +2,16 @@ import React,{useState} from 'react'
 import Form from '../components/form';
 import { Link } from 'react-router-dom';
 import './loginSignup.css'
+import { useNavigate } from 'react-router-dom';
 import { signInWithGoogle } from "../firebase_config";
 export const SignupPage=()=>{
     const signup=true;
+    const navigate=useNavigate();
+    const signIn=async()=>{
 
-
+        await signInWithGoogle()
+        navigate('/')
+    }
 
 
 
@@ -24,7 +29,7 @@ export const SignupPage=()=>{
        </Link>
        <div>
     <button 
-    onClick={signInWithGoogle}
+    onClick={signIn}
     className='google-auth'>
        <img
        className="google-auth-btn"

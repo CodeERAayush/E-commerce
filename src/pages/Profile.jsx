@@ -7,9 +7,9 @@ const Profile=()=>{
 
 
     const [details,setDetails]=useState({
-        name:localStorage.getItem('name'),
-        email:localStorage.getItem('email'),
-        address:'Nan',
+        name:'',
+        email:'',
+        address:'',
         profile:'../images/userprofile.png'
     })
 
@@ -19,7 +19,7 @@ const Profile=()=>{
             if(user){
                 console.log(user.uid)
                 const docSnap = await getDoc(doc(db, "users", user.uid));
-                // console.log(docSnap.data())
+                console.log(docSnap.data())
                 setDetails(docSnap.data())
             }
         })
