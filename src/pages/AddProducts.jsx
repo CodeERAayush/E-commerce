@@ -2,6 +2,7 @@ import React,{useState} from 'react'
 import { storage,db } from '../firebase_config';
 import {ref,uploadBytesResumable,getDownloadURL} from 'firebase/storage'
 import {doc,setDoc,addDoc,collection} from 'firebase/firestore'
+import './AddProduct.css'
 export const AddProducts = () => {
 
     const [title, setTitle]=useState('');
@@ -9,7 +10,7 @@ export const AddProducts = () => {
     const [price, setPrice]=useState('');
     const [image, setImage]=useState(null);
     const [imageError, setImageError]=useState('');
-    
+    const [longDes,setLongDes]=useState('');
     const [successMsg, setSuccessMsg]=useState('');
     const [uploadError, setUploadError]=useState('');
 
@@ -48,6 +49,7 @@ export const AddProducts = () => {
                     const docRef = await addDoc(collection(db, "Products"), {
                         title,
                     description,
+                    longDes,
                     price: Number(price),
                     url
                     });
@@ -55,6 +57,7 @@ export const AddProducts = () => {
                     setSuccessMsg('Product added successfully');
                     setTitle('');
                     setDescription('');
+                    setLongDes('');
                     setPrice('');
                     document.getElementById('file').value='';
                     setImageError('');
@@ -87,9 +90,19 @@ export const AddProducts = () => {
                 <input type="text" className='form-control' required
                 onChange={(e)=>setTitle(e.target.value)} value={title}></input>
                 <br></br>
-                <label>Product Description</label>
+                <label>Product Short Description</label>
                 <input type="text" className='form-control' required
                 onChange={(e)=>setDescription(e.target.value)} value={description}></input>
+                <br></br>
+                <label>Product long description</label>
+                <textarea className='textarea-control' required
+                value={longDes}
+                onChange={(e)=>setLongDes(e.target.value)} 
+                rows='10'
+                cols='87'
+                >
+
+                </textarea>
                 <br></br>
                 <label>Product Price</label>
                 <input type="number" className='form-control' required

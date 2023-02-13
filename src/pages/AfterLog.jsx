@@ -6,7 +6,7 @@ import { auth } from "../firebase_config";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import './HomePage.css'
-export const AfterLog = () => {
+export const AfterLog = ({navigation}) => {
     const [isHovering, setIsHovering] = useState(false);
     const [products,setProducts]=useState([]);
     const [uploading,setUploading]=useState(false);

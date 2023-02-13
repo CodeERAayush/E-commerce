@@ -1,6 +1,8 @@
 import React from "react";
 import './itemCard.css'
+import { Link, useNavigate, } from "react-router-dom";
 export const ItemCard=({elem,addToCart})=>{
+const navigate=useNavigate();
     const handle_add=()=>{
         addToCart(elem);
     }
@@ -20,7 +22,10 @@ return(
                 <button 
                 onClick={handle_add}
                 className="product-asses-button">Add to Cart</button>
-                <button className="product-asses-button">View Product</button>
+                <Link
+                to='/viewproduct'
+                state={{elem:elem}}
+                className="product-asses-button">View Product</Link>
             </div>
 
         </div>
