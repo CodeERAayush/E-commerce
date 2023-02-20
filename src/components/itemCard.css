@@ -1,17 +1,20 @@
 .card-holder{
     display: flex;
     flex-direction: column;
-    margin: 10px;
+    margin: 20px;
     height: 350px;
     width: 200px;
-    background-color: rgb(226, 241, 255);
     padding: 5px;
     border-radius: 10px;
     box-shadow: 0 0px 2px 2px rgb(254, 254, 254);
 }
+.card-holder:hover{
+    box-shadow: 0 2px 2px;
+}
 .product-image{
     height: 180px;
-    width: 180px;
+    width: auto;
+    max-width: 180px;
 }
 .product-price{
 margin: 0;
@@ -24,7 +27,7 @@ font-weight: 500;
     margin: 0;
     font-size: 13px;
     font-weight: 600;
-    height: 22px;
+    height: 30px;
 }
 .product-description{
     margin: 0;
@@ -61,4 +64,9 @@ font-weight: 500;
     font-size: 12px;
     font-weight: 500;
 
+}
+.upper-part{
+    width: 200px;
+    display: flex;
+    justify-content: center;
 }

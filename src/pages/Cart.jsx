@@ -1,15 +1,25 @@
 import React, { useState ,useEffect} from "react";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { ItemInCard } from "../components/ItemInCart";
 import { PriceCard } from "../components/priceCard";
-import { collection, getDocs, updateDoc,doc, deleteDoc } from "firebase/firestore";
+import { collection, getDocs, updateDoc,getDoc,doc, deleteDoc, onSnapshot } from "firebase/firestore";
 import { db,auth } from "../firebase_config";
+import { useNavigate } from "react-router-dom";
+import StripeCheckout from 'react-stripe-checkout';
 import './Cart.css'
+import axios from "axios";
+
+// toast.configure();
 export const Cart=()=>{
+    const navigate=useNavigate();
+    const [totalPrice,setTotalPrice]=useState();
+    const [uid,setUid]=useState();
     const [cartItems,setCartItems]=useState([]);
     function getData(){
             auth.onAuthStateChanged(async user=>{
                 if(user){
-
+                    setUid(user.uid);
                     await getDocs(collection(db, "cart " +user.uid))
                     .then( (querySnapshot)=>{               
                         const newData = querySnapshot.docs
@@ -49,6 +59,7 @@ const [cartProducts, setCartProducts]=useState([]);
 
 
 
+    
 
 
 
@@ -114,6 +125,48 @@ const cartProductDecrease =(cartProduct)=>{
 
 
 
+const handleToken=async (token)=>{
+console.log(token)
+const cart={name:'All Products',totalPrice}
+const response=await axios.post('http://localhost:8080/checkout',{
+    token,
+    cart
+})
+console.log(response.data);
+let {status}=response.data;
+if(status==='success'){
+navigate('/')
+// toast.success('Your order has been placed successfully', {
+//     position: 'top-right',
+//     autoClose: 5000,
+//     hideProgressBar: false,
+//     closeOnClick: true,
+//     pauseOnHover: false,
+//     draggable: false,
+//     progress: undefined,
+//   });
+
+
+  
+
+
+
+}
+else{
+    alert('something went wrong in checkout!')
+}
+}
+
+
+const getCartItems=async ()=>{
+    const uids=await getDoc(doc(db,"cart "+uid));
+console.log("Carts Items Are :" + uids)
+}
+useEffect(()=>{
+    getCartItems();
+})
+
+
 
     return (
 <div className="cart">
@@ -137,10 +190,20 @@ const cartProductDecrease =(cartProduct)=>{
 <div className="right-section">
 <PriceCard
 cartItems={cartItems}
+totalPrice={totalPrice}
+setTotalPrice={setTotalPrice}
 />
-<button
+{/* <button
 className="order-btn"
->Order Now</button>
+>Order Now</button> */}
+<StripeCheckout
+                            stripeKey='pk_live_51MblCMSInLvTpt5QMKJSxh9g2NAR80L9QPE2CXkYYRmIrz2ZOOi05JzrwFR2KevP6UbhVBVmt0nPKlMD1PvAR8RO00KrGS2ANM'
+                            token={handleToken}
+                            billingAddress
+                            shippingAddress
+                            name='All Products'
+                            amount={totalPrice * 100}
+                        ></StripeCheckout>
 </div>
 </div>
     )

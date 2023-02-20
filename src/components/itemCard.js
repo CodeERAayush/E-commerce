@@ -6,6 +6,7 @@ const navigate=useNavigate();
     const handle_add=()=>{
         addToCart(elem);
     }
+    // console.log(elem.category[0].value)
 return(
     <div className="card-holder">
         <div className="upper-part">

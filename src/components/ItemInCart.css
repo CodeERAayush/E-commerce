@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 5px;
+    /* background-color: black; */
     /* border-bottom: 1px solid black; */
     border-left: 1px solid;
     border-right: 1px solid;
@@ -34,12 +35,13 @@
     margin: 10px;
     align-self: center;
 }
-.upper-part{
+.cart-upper-part{
     display: flex;
 }
 .cart-right-section{
     width: 75%;
-    /* background-color: antiquewhite; */
+    /* height: 100%; */
+    background-color: rgba(250, 235, 215, 0.371);
     margin-top: 5px;
     display: flex;
     flex-direction: column;

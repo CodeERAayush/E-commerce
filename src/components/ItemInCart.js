@@ -6,10 +6,11 @@ export const ItemInCard=({elem,cartProductIncrease,removeItem,cartProductDecreas
     // React.useEffect(()=>{
     //     setOrders(...orders,[elem]);
     // },[elem])
+    console.log((elem.Product.description).length)
     return(
         <>
         <div className="card">
-            <div className="upper-part">
+            <div className="cart-upper-part">
                 <div className="cart-left-section">
                 <img
 // src="https://static.vecteezy.com/system/resources/previews/002/238/646/original/isolated-of-shopping-cart-icon-basket-symbol-eps10-free-vector.jpg"
@@ -20,7 +21,7 @@ className="cart-image"
             </div>
             <div className="cart-right-section">
                 <p className="cart-product-name">{elem.Product.title}</p>
-                <p className="cart-product-subtitle">{elem.Product.description}</p>
+                <p className="cart-product-subtitle">{(elem.Product.description).length<'20'?(elem.Product.description):'hey'}</p>
                 <p className="cart-product-price">{elem.Product.price} $</p>
                 <p className="stock-status">In Stock</p>
             </div>

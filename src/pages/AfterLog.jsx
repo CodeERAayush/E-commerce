@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { ItemCard } from "../components/itemCard";
-import { collection, getDocs,setDoc,doc,addDoc } from "firebase/firestore";
+import { collection, getDocs,setDoc,doc,addDoc, query,where, limit, orderBy } from "firebase/firestore";
 import { db } from "../firebase_config";
 import { auth } from "../firebase_config";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import './HomePage.css'
+import { Categories } from "../components/categories";
 export const AfterLog = ({navigation}) => {
     const [isHovering, setIsHovering] = useState(false);
     const [products,setProducts]=useState([]);
+    const [allProducts,setAllProducts]=useState([]);
+    const categoryValues=[1,2,3,4,5,6,7,8,9,10,11];
+    const categories=['Mens Wear','Ladies Wear','Electronics','Gadgets','Kids Wear','Books','Smartphones','Home','Personal Care','Toys and Baby','Grocery'];
     const [uploading,setUploading]=useState(false);
     const navigate=useNavigate();
     const handleMouseOver = () => {
@@ -20,8 +24,9 @@ export const AfterLog = ({navigation}) => {
     };
 
 
-    const getProducts=async()=>{
-        await getDocs(collection(db, "Products"))
+    const getProducts=async(index)=>{
+        console.log('getPorducts clicked',index)
+        await getDocs(query(collection(db, "Products"),where("category","==",index)))
             .then((querySnapshot)=>{               
                 const newData = querySnapshot.docs
                     .map((doc) => ({...doc.data(), id:doc.id }));
@@ -29,11 +34,20 @@ export const AfterLog = ({navigation}) => {
                 console.log(products, newData);
             })
     }
-
+    const getAllProducts=async()=>{
+        await getDocs(query(collection(db, "Products"),orderBy('timestamp','desc'),limit(10)))
+            .then((querySnapshot)=>{               
+                const newData = querySnapshot.docs
+                    .map((doc) => ({...doc.data(), id:doc.id }));
+                setAllProducts(newData);                
+                console.log(products, newData);
+            })
+    }
 
 
     useEffect(()=>{
-        getProducts();
+        // getProducts(i);
+        getAllProducts();
     },[])
   
 
@@ -70,7 +84,6 @@ console.log("User is logged in "+ uid);
 
         }
         else{
-            // props.history.push('/login');
             navigate('/Login')
         }
         
@@ -92,12 +105,12 @@ console.log("User is logged in "+ uid);
                 <div className="category-heading-holder">
                     <p className="category-heading"
                     onMouseOver={handleMouseOver}
-                    onMouseOut={handleMouseOut}>Category Name</p>
+                    onMouseOut={handleMouseOut}>All</p>
                     {isHovering&&<p className="category-subhead">Explore More</p>}
                 </div>
-                {!uploading&&products.length>0&&<div className="items-in-row">
+                {!uploading&&allProducts.length>0&&<div className="items-in-row">
                     {
-                        products.map((elem)=>{
+                        allProducts.map((elem)=>{
                             return (
                                 <ItemCard 
                                 addToCart={addToCart}
@@ -107,6 +120,31 @@ console.log("User is logged in "+ uid);
                         })
                     }
                 </div>}
+
+
+
+
+
+                {
+                categoryValues.map( (index)=>{
+                     return <Categories
+                     index={index}
+                     addToCart={addToCart}
+
+                     />
+                })
+               
+                }
+
+
+
+
+
+
+
+
+
+
                 {
                    uploading && products.length<1&&(<div className='container-fluid'>Please wait....</div>)
                 }

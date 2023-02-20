@@ -38,7 +38,6 @@ let Product;
             });
         }
         else{
-            // props.history.push('/login');
             navigate('/Login')
         }
         

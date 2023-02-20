@@ -3,6 +3,8 @@ import { storage,db } from '../firebase_config';
 import {ref,uploadBytesResumable,getDownloadURL} from 'firebase/storage'
 import {doc,setDoc,addDoc,collection} from 'firebase/firestore'
 import './AddProduct.css'
+import Select from "react-dropdown-select";
+
 export const AddProducts = () => {
 
     const [title, setTitle]=useState('');
@@ -13,6 +15,7 @@ export const AddProducts = () => {
     const [longDes,setLongDes]=useState('');
     const [successMsg, setSuccessMsg]=useState('');
     const [uploadError, setUploadError]=useState('');
+    const [category,setCategory]=useState()
 
     const types =['image/jpg','image/jpeg','image/png','image/PNG'];
     const handleProductImg=(e)=>{
@@ -36,6 +39,10 @@ export const AddProducts = () => {
         e.preventDefault();
         // console.log(title, description, price);
         // console.log(image);
+        if(category===undefined){
+            alert('please select category!')
+        }
+        else{
         const uploadTask=ref(storage,`product-images/${image.name}`)
         const uploadFile=uploadBytesResumable(uploadTask,image);
         uploadFile.on('state_changed',snapshot=>{
@@ -44,14 +51,15 @@ export const AddProducts = () => {
         },error=>setUploadError(error.message),()=>{
             // ref(storage,'product-images').child(image.name).
             getDownloadURL(uploadFile.snapshot.ref).then(async url=>{
-
                 try {
                     const docRef = await addDoc(collection(db, "Products"), {
                         title,
                     description,
                     longDes,
                     price: Number(price),
-                    url
+                    url,
+                    category:category[0].value,
+                    timestamp:Date.now(),
                     });
                     console.log("Document written with ID: ", docRef.id);
                     setSuccessMsg('Product added successfully');
@@ -59,6 +67,7 @@ export const AddProducts = () => {
                     setDescription('');
                     setLongDes('');
                     setPrice('');
+                    setCategory();
                     document.getElementById('file').value='';
                     setImageError('');
                     setUploadError('');
@@ -74,6 +83,70 @@ export const AddProducts = () => {
             })
         })
     }
+    }
+
+
+
+
+
+    const options = [
+        { 
+          value: 1,
+          label: "Mens Wear"
+        },
+        {
+          value:  2,
+          label: "Ladies Wear"
+        },
+        { 
+            value: 3,
+            label: "Electronics"
+          },
+          {
+            value:  4,
+            label: "Gadgets"
+          },
+          { 
+            value: 5,
+            label: "Kids Wear"
+          },
+          {
+            value:  6,
+            label: "Books"
+          },
+          {
+            value:  7,
+            label: "Smartphones"
+          },
+          {
+            value:  8,
+            label: "Home"
+          },
+          {
+            value:  9,
+            label: "Personal Care"
+          },
+          {
+            value:  10,
+            label: "Toys and Baby"
+          },
+          {
+            value:  11,
+            label: "Grocery"
+          }
+
+
+      ];
+
+
+
+
+
+
+
+
+
+
   
     return (
         <div className='container'>
@@ -90,6 +163,10 @@ export const AddProducts = () => {
                 <input type="text" className='form-control' required
                 onChange={(e)=>setTitle(e.target.value)} value={title}></input>
                 <br></br>
+                <Select options={options}
+            placeholder="Select Category"
+            onChange={(values) => setCategory(values)} />
+            <br></br>
                 <label>Product Short Description</label>
                 <input type="text" className='form-control' required
                 onChange={(e)=>setDescription(e.target.value)} value={description}></input>
