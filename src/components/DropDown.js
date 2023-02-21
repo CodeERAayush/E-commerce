@@ -24,12 +24,12 @@ function Dropdown({ userId,logout }) {
       </button>
       {isOpen && (
         <ul onMouseLeave={closeDropdown} className="dropdown-menu" onMouseLeave={closeDropdown}>
-         { LoginOrLogout&& 
+         { !LoginOrLogout&& 
          <li>
             <Link to="/Profile">Profile</Link>
           </li>
 }
-{ LoginOrLogout&&
+{ !LoginOrLogout&&
           <li>
             <Link to="/Cart">Cart</Link>
           </li>
