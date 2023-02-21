@@ -5,14 +5,14 @@ import { auth, signInWithGoogle } from "../firebase_config";
 import { useNavigate } from "react-router-dom";
 import './Nav.css'
 import { signOut } from "firebase/auth";
-function NavBar() {
+function NavBar({userId}) {
   const navigate=useNavigate();
   const logout=async ()=>{
     localStorage.clear()
     await signOut(auth)
     window.location.reload();
   }
-  const [userId, setUid]=useState(null);
+  const [user, setUid]=useState(null);
     function GetUserUid(){
         useEffect(()=>{
             auth.onAuthStateChanged(user=>{
@@ -21,7 +21,7 @@ function NavBar() {
                 }
             })
         },[])
-        return userId;
+        return user;
     }
 
     const uid = GetUserUid();
@@ -75,7 +75,9 @@ navigate('/Login')
               />
             </button>
         </p>
-        <Dropdown/>
+        <Dropdown userId={userId}
+        logout={logout}
+        />
         {
           localStorage.getItem('name')===null?
         <p className="login-custom-btn">

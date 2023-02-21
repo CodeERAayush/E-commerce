@@ -11,12 +11,22 @@ import { Cart } from './pages/Cart';
 import Profile from './pages/Profile';
 import { EditProfile } from './pages/EditProfile';
 import { ViewProduct } from './pages/ViewProduct';
+import React,{useEffect,useState} from 'react';
+import { auth } from './firebase_config';
 
 function App() {
+  const [userId, setUid]=useState(null);
+      useEffect(()=>{
+          auth.onAuthStateChanged(user=>{
+              if(user){
+                  setUid(user.uid);
+              }
+          })
+      },[])
   return (
     <div className="App">
       <Router>
-        <NavBar/>
+        <NavBar userId={userId}/>
 <Routes>
   <Route path='/' element={<AfterLog/>}/>
   <Route path='/Login' element={<LoginPage/>}/>
