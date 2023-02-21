@@ -41,6 +41,7 @@ navigate('/Login')
         <Link to='/' className="navbar-logo">
           E-com
         </Link>
+        {/* <iframe src="https://embed.lottiefiles.com/animation/112961"></iframe> */}
         <div className="navbar-menu-icon">
           <i className="fa fa-bars fa-2x" />
         </div>
@@ -62,6 +63,15 @@ navigate('/Login')
           </li>
         </ul>
       </div>
+      <div className="middle-part">
+      <input 
+          className="search-box"
+          placeholder="Search Product"
+         
+        >
+         </input>
+         <img src="../images/search.svg" alt="search-icon" className="search-icon"/>
+        </div>
       <div className="right-part">
          <p className="login-custom-btn"
          style={{marginRight:5}}>
