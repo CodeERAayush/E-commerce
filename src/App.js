@@ -12,6 +12,7 @@ import Profile from './pages/Profile';
 import { EditProfile } from './pages/EditProfile';
 import { ViewProduct } from './pages/ViewProduct';
 import React,{useEffect,useState} from 'react';
+import BottomArea from './components/bottomArea';
 import { auth } from './firebase_config';
 
 function App() {
@@ -37,8 +38,9 @@ function App() {
   <Route path='/Profile/Edit' element={<EditProfile/>}/>
   <Route path='/viewproduct' element={<ViewProduct/>}/>
 </Routes>
+
      </Router>
-     
+     <BottomArea/>
     </div>
   );
 }

@@ -4,9 +4,10 @@ import { collection, getDocs,setDoc,doc,addDoc, query,where, limit, orderBy } fr
 import { db } from "../firebase_config";
 import { auth } from "../firebase_config";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../components/NavBar";
+// import NavBar from "../components/NavBar";
 import './HomePage.css'
 import { Categories } from "../components/categories";
+import BottomArea from "../components/bottomArea";
 export const AfterLog = ({navigation}) => {
     const [isHovering, setIsHovering] = useState(false);
     const [products,setProducts]=useState([]);
@@ -149,6 +150,7 @@ console.log("User is logged in "+ uid);
                    uploading && products.length<1&&(<div className='container-fluid'>Please wait....</div>)
                 }
             </div>
+            {/* <BottomArea/> */}
         </>
     )
 }

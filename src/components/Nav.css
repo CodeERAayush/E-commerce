@@ -8,6 +8,19 @@
   width: 100%;
   /* background-color: aliceblue; */
 }
+.scrolled{
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 100;
+  width: 100%;
+  /* background-color: aliceblue; */
+  /* background-color: white; */
+  box-shadow: 0 0 18px black;
+  backdrop-filter: blur(2em);
+}
 
 .left-part {
   display: flex;

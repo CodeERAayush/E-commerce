@@ -7,6 +7,39 @@ import './Nav.css'
 import { signOut } from "firebase/auth";
 function NavBar({userId}) {
   const navigate=useNavigate();
+
+
+
+
+
+
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const navbarClass = isScrolled ? 'scrolled' : 'navbar';
+
+
+
+
+
+
+
+
+
   const logout=async ()=>{
     localStorage.clear()
     await signOut(auth)
@@ -35,7 +68,7 @@ navigate('/Login')
 }
   }
   return (
-      <nav className="navbar">
+      <nav className={navbarClass}>
       <div className="navbar-container">
         <div className="left-part">
         <Link to='/' className="navbar-logo">

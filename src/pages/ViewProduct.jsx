@@ -73,8 +73,8 @@ return(
             <p className="view-product-details">{elem.description}</p>
             <p className="view-product-price">₹{elem.price}</p>
             <div className="long-description-area">
-                <p className="view-product-description">Description!</p>
-                <p>{elem.longDes===""||elem.longDes===undefined?"no description available":elem.longDes}</p>
+                <p className="view-product-description-right">Description!</p>
+                <p style={{textAlign: "initial"}}>{elem.longDes===""||elem.longDes===undefined?"no description available":elem.longDes}</p>
             </div>
         </div>
     </div>
